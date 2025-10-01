@@ -1,0 +1,45 @@
+```lua
+-- LocalScript en StarterPlayerScripts o StarterGui
+
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+-- Variables
+local fuerza = 0
+local gananciaPorEntrenamiento = 10 -- Fuerza ganada por cada repetición
+local tiempoEntreEntrenamientos = 2 -- Tiempo en segundos entre entrenamientos
+
+-- Crear un GUI básico
+local screenGui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+local entrenarButton = Instance.new("TextButton")
+entrenarButton.Size = UDim2.new(0, 200, 0, 50)
+entrenarButton.Position = UDim2.new(0.5, -100, 0.5, -25)
+entrenarButton.Text = "Entrenar"
+entrenarButton.Parent = screenGui
+
+local fuerzaLabel = Instance.new("TextLabel")
+fuerzaLabel.Size = UDim2.new(0, 200, 0, 50)
+fuerzaLabel.Position = UDim2.new(0.5, -100, 0.5, 30)
+fuerzaLabel.Text = "Fuerza: " .. fuerza
+fuerzaLabel.Parent = screenGui
+
+-- Función para entrenar
+local function entrenar()
+    while true do
+        fuerza = fuerza + gananciaPorEntrenamiento
+        fuerzaLabel.Text = "Fuerza: " .. fuerza
+        print("Entrenando... Fuerza actual: " .. fuerza)
+        wait(tiempoEntreEntrenamientos)
+    end
+end
+
+-- Conectar el botón de entrenamiento
+entrenarButton.MouseButton1Click:Connect(entrenar)
+```
+
+### Cómo usar este script:
+1. Coloca este script en un `LocalScript` dentro de `StarterPlayerScripts` o `StarterGui`.
+2. Cuando el jugador haga clic en el botón "Entrenar", comenzará a ganar fuerza cada pocos segundos.
+
+Recuerda que puedes ajustar `gananciaPorEntrenamiento` y `tiempoEntreEntrenamientos`
